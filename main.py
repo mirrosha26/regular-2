@@ -6,7 +6,6 @@ with open("phonebook_raw.csv") as f:
   rows = csv.reader(f, delimiter=",")
   contacts_list = list(rows)
 
-# lastname,firstname,surname,organization,position,phone,email
 pattern_phone = r"(8|\+7)\s*[(-]?(\d{3})[)]?\s*[-]?\s*(\d{3})\s*[-]?(\d{2})\s*[-]?(\d{2})(\s*)[(]?(\w+[.])?\s*(\w+)?[)]?"
 
 claen_list = {}
@@ -25,7 +24,8 @@ for contact in contacts_list[1:]:
     else: 
         claen_list[fio[0]] = check
 
+out_list = [contacts_list[0]] + [i for i in claen_list.values()]
 with open("phonebook.csv", "w") as f:
   datawriter = csv.writer(f, delimiter=',')
-  datawriter.writerows([i for i in claen_list.values()])
+  datawriter.writerows(out_list)
 
